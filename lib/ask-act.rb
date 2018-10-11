@@ -4,12 +4,12 @@ class NextIteration < StandardError
 end
 
 class LoopControl
-	def break
-		raise StopIteration
-	end
-	def next
-		raise NextIteration
-	end
+  def break
+    raise StopIteration
+  end
+  def next
+    raise NextIteration
+  end
 end
 
 class AskAct
