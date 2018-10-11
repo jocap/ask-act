@@ -75,3 +75,5 @@ class AskAct
     end
   end
 end
+
+# vi: et:sw=2:ts=2

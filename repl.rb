@@ -14,3 +14,5 @@ repl
   .on(nil) { |loop| puts; loop.break } # ^D
   .rescue(Interrupt) { |loop| puts; loop.next } # ^C
   .run
+
+# vi: et:sw=2:ts=2
