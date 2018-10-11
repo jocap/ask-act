@@ -11,6 +11,6 @@ prompt = "#{prefix} > "
 repl
   .ask { Readline.readline(prompt, true) }
   .act { |command| system "#{prefix} #{command}" }
-  .on(nil) { puts; repl.break } # ^D
-  .rescue(Interrupt) { puts; repl.next } # ^C
+  .on(nil) { |loop| puts; loop.break } # ^D
+  .rescue(Interrupt) { |loop| puts; loop.next } # ^C
   .run

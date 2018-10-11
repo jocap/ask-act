@@ -3,10 +3,20 @@
 class NextIteration < StandardError
 end
 
+class LoopControl
+	def break
+		raise StopIteration
+	end
+	def next
+		raise NextIteration
+	end
+end
+
 class AskAct
   def initialize
     @act_on = Hash.new
     @rescue = Hash.new
+    @loop = LoopControl.new
   end
 
   def ask(&block)
@@ -47,27 +57,19 @@ class AskAct
     self
   end
 
-  def break
-    raise StopIteration
-  end
-
-  def next
-    raise NextIteration
-  end
-
   private
 
   def do_act(value)
     if @act_on.key? value
-      @act_on[value].call(value)
+      @act_on[value].call(@loop)
     else
-      @act.call(value)
+      @act.call(value, @loop)
     end
   end
 
   def do_rescue(e)
     if @rescue.key? e
-      @rescue[e].call
+      @rescue[e].call(@loop)
     else
       raise e
     end
